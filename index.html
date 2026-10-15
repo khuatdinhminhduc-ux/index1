@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Sơn Tây Quê Em - Về Sơn Tây, Về Miền Di Sản (2K QHD)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #b71c1c;
+      --accent-gold: #f59e0b;
+      --heritage-brown: #5d4037;
+      --card-bg: #ffffff;
+      --text-dark: #1f2937;
+      --text-muted: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: radial-gradient(circle at top, #fffbeb 0%, #fef3c7 45%, #fde68a 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #881337 0%, #b91c1c 50%, #9a3412 100%);
+      color: #fff;
+      text-align: center;
+      padding: 28px 20px 34px;
+      box-shadow: 0 6px 24px rgba(185, 28, 28, 0.25);
+      border-bottom: 4px solid var(--accent-gold);
+    }
+
+    .badge-2k-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(253, 224, 71, 0.6);
+      color: #fde047;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: #fef08a;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      margin-bottom: 6px;
+    }
+
+    header .subtitle {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ffedd5;
+    }
+
+    .main-container {
+      max-width: 1180px;
+      margin: -20px auto 0;
+      padding: 0 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .video-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(93, 64, 55, 0.16);
+      padding: 20px;
+      border: 2px solid #fde68a;
+      margin-bottom: 24px;
+    }
+
+    .player-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .mode-btn {
+      border: 1px solid var(--primary-red);
+      background: var(--primary-red);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(183, 28, 28, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quality-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .res-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .toggle-enhance {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--heritage-brown);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .video-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-viewport iframe,
+    .video-viewport video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+      object-fit: cover;
+    }
+
+    .enhance-2k {
+      filter: url(#sharpen-2k) contrast(1.06) saturate(1.08);
+    }
+
+    .file-upload-bar {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #fffbeb;
+      border: 1px dashed #f59e0b;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+
+    .file-upload-btn {
+      background: var(--heritage-brown);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(93, 64, 55, 0.1);
+      border: 1px solid #fde68a;
+    }
+
+    .panel-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-red);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid #fef3c7;
+      padding-bottom: 10px;
+    }
+
+    .chapters-list {
+      display: grid;
+      gap: 10px;
+      max-height: 430px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #fdfbf7;
+      border: 1px solid #f3e8d2;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      width: 100%;
+    }
+
+    .chapter-item:hover {
+      background: #fef3c7;
+      border-color: var(--accent-gold);
+      transform: translateX(4px);
+    }
+
+    .chapter-time {
+      background: var(--primary-red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 9px;
+      border-radius: 6px;
+      min-width: 54px;
+      text-align: center;
+    }
+
+    .chapter-desc strong {
+      display: block;
+      font-size: 0.94rem;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+
+    .chapter-desc span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .highlights-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      background: #fffbeb;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .student-box {
+      background: linear-gradient(135deg, #064e3b 0%, #115e59 100%);
+      color: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      border: 2px solid #fde047;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(6, 78, 59, 0.2);
+    }
+
+    .student-box .quote {
+      font-style: italic;
+      color: #fef08a;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    .student-box .author-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .student-box .school-info {
+      font-size: 0.88rem;
+      color: #a7f3d0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.85rem;
+      color: var(--heritage-brown);
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bộ lọc SVG Super-Resolution 2K Sharpening -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <filter id="sharpen-2k">
+        <feConvolveMatrix
+          order="3 3"
+          preserveAlpha="true"
+          kernelMatrix="0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0" />
+      </filter>
+    </defs>
+  </svg>
+
+  <header>
+    <div class="badge-2k-top">★ Chuẩn hiển thị 2K QHD (2560 × 1440) ★</div>
+    <h1>Sơn Tây Quê Em</h1>
+    <div class="subtitle">Về Sơn Tây - Về Miền Di Sản &amp; Truyền Thống Xứ Đoài</div>
+  </header>
+
+  <main class="main-container">
+    <section class="video-card">
+      <div class="player-toolbar">
+        <div class="mode-btn">
+          🎬 Phát Video Về Sơn Tây - Về Miền Di Sản (2K Upscale)
+        </div>
+
+        <div class="quality-controls">
+          <span class="res-badge">2K QHD • 1440p60</span>
+          <label class="toggle-enhance">
+            <input type="checkbox" id="chk-sharpen" checked onchange="toggleSharpen(this.checked)">
+            Làm sắc nét 2K (Super-Resolution)
+          </label>
+        </div>
+      </div>
+
+      <!-- Khung phát Video chuẩn tỷ lệ 2K (2560x1440) -->
+      <div class="video-viewport" id="player-container">
+        <!-- 1. Khung phát YouTube (Tự động bật khi mở qua mạng https://) -->
+        <iframe
+          id="yt-player"
+          class="enhance-2k"
+          src="https://www.youtube.com/embed/vjE7unTdR8w?rel=0&playsinline=1"
+          title="Về Sơn Tây - Về Miền Di Sản"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+
+        <!-- 2. Khung phát File MP4 (Tự động bật khi mở file trực tiếp trên ổ cứng máy tính) -->
+        <video
+          id="html5-player"
+          class="enhance-2k"
+          width="2560"
+          height="1440"
+          controls
+          playsinline
+          preload="auto"
+          style="display: none;">
+          <source src="YTSave_YouTube_Media_vjE7unTdR8w_VĂN-HÓA-DU-LỊCH-Về-Sơn-Tây-Về-Miền-Di-Sản_001_1080p.mp4" type="video/mp4">
+          <source src="video.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ phát video HTML5.
+        </video>
+      </div>
+
+      <!-- Thanh công cụ hỗ trợ chọn file hoặc mở trực tiếp YouTube -->
+      <div class="file-upload-bar" id="local-file-bar">
+        <span>💡 Bạn có thể chọn file MP4 từ thiết bị hoặc mở trực tiếp trên YouTube:</span>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <label class="file-upload-btn">
+            📂 Chọn File Video MP4 từ máy
+            <input type="file" accept="video/*" style="display:none" onchange="loadCustomVideo(event)">
+          </label>
+          <a href="https://youtu.be/vjE7unTdR8w?si=RzfUOxhFkZrG7EED" target="_blank" class="file-upload-btn" style="background: #b71c1c;">
+            ▶️ Xem thẳng trên YouTube
+          </a>
+        </div>
+      </div>
+    
+      <!-- Hộp tạo Mã QR trực tiếp ngay trong trang HTML -->
+      <div class="file-upload-bar" style="margin-top: 10px; background: #f0fdf4; border-color: #16a34a;">
+        <div style="flex: 1; min-width: 240px;">
+          <strong style="color: #15803d;">📱 Tạo Mã QR để mở trên Điện Thoại:</strong>
+          <p style="font-size: 0.82rem; color: #374151; margin-top: 4px;">
+            Dán đường link trang web (sau khi bạn kéo file <code>index.html</code> lên <b>tiiny.host</b> hoặc <b>app.netlify.com/drop</b>) hoặc giữ nguyên link video dưới đây để lấy Mã QR quét trên điện thoại:
+          </p>
+          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+            <input id="qr-url-input" type="text" value="https://youtu.be/vjE7unTdR8w" 
+              style="flex: 1; padding: 7px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; min-width: 220px;" 
+              placeholder="Nhập link https://... của bạn vào đây" />
+            <button onclick="updateQRCode()" class="file-upload-btn" style="background: #15803d; border: none;">
+              🔄 Tạo Mã QR
+            </button>
+          </div>
+        </div>
+        <div style="text-align: center; background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #bbf7d0;">
+          <img id="live-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fyoutu.be%2FvjE7unTdR8w" 
+            alt="Mã QR" style="width: 110px; height: 110px; display: block; margin: 0 auto;" />
+          <span style="font-size: 0.72rem; color: #15803d; font-weight: 600;">Quét bằng Camera ĐT</span>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="info-grid">
+      <section class="panel">
+        <h2 class="panel-title">📍 Khám Phá Các Địa Danh Trong Video (Bấm để xem)</h2>
+        <div class="chapters-list">
+          <button class="chapter-item" onclick="seekTo(0)">
+            <span class="chapter-time">00:00</span>
+            <div class="chapter-desc">
+              <strong>Cửa ngõ phía Tây Thủ đô Hà Nội</strong>
+              <span>Trung tâm văn hóa xứ Đoài xưa, cách trung tâm Hà Nội 42km</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(31)">
+            <span class="chapter-time">00:31</span>
+            <div class="chapter-desc">
+              <strong>Làng cổ Đường Lâm - Đất Hai Vua</strong>
+              <span>Nhà cổ đá ong hơn 400 năm, quê hương Vua Phùng Hưng, Ngô Quyền, Thám hoa Giang Văn Minh</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(79)">
+            <span class="chapter-time">01:19</span>
+            <div class="chapter-desc">
+              <strong>Thành cổ Sơn Tây</strong>
+              <span>Một trong Tứ trấn thành bảo vệ kinh thành Thăng Long với tường đá ong, Kỳ đài, Giếng Ngọc</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(105)">
+            <span class="chapter-time">01:45</span>
+            <div class="chapter-desc">
+              <strong>Văn Miếu Sơn Tây</strong>
+              <span>Nơi thờ Đức Thánh Khổng Tử, danh nhân Chu Văn An và biểu tượng truyền thống hiếu học xứ Đoài</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(128)">
+            <span class="chapter-time">02:08</span>
+            <div class="chapter-desc">
+              <strong>Chùa Mía &amp; Đền Và</strong>
+              <span>Ngôi chùa cổ ngàn năm nhiều tượng nghệ thuật nhất Việt Nam &amp; rừng lim Cây Di sản Việt Nam</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(165)">
+            <span class="chapter-time">02:45</span>
+            <div class="chapter-desc">
+              <strong>Hồ Đồng Mô &amp; Khu nghỉ dưỡng sinh thái</strong>
+              <span>Hơn 1.000 ha mặt nước, Glory Resort, homestay xanh mát và sân Golf quốc tế</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(194)">
+            <span class="chapter-time">03:14</span>
+            <div class="chapter-desc">
+              <strong>Làng Văn hóa - Du lịch các dân tộc Việt Nam</strong>
+              <span>Không gian tái hiện bản sắc văn hóa truyền thống của 54 dân tộc anh em</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(207)">
+            <span class="chapter-time">03:27</span>
+            <div class="chapter-desc">
+              <strong>Phố đi bộ Thành cổ Sơn Tây</strong>
+              <span>Không gian văn hóa cộng đồng, nghệ thuật đường phố sôi động mỗi dịp cuối tuần</span>
+            </div>
+          </button>
+
+          <button class="chapter-item" onclick="seekTo(232)">
+            <span class="chapter-time">03:52</span>
+            <div class="chapter-desc">
+              <strong>Ẩm thực xứ Đoài &amp; Tết xưa làng Việt</strong>
+              <span>Bánh tẻ, gà Mía, kẹo lạc, chè lam truyền thống và không gian Tết xưa, Trung thu Thành cổ</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel-title">🌸 Vẻ Đẹp Di Sản Và Truyền Thống</h2>
+        <ul class="highlights-list">
+          <li>🏛️ <strong>Tham quan di tích nổi tiếng:</strong> Thành cổ Sơn Tây, Làng cổ Đường Lâm, Văn Miếu, Chùa Mía, Đền Và.</li>
+          <li>⛰️ <strong>Khám phá cảnh đẹp thiên nhiên:</strong> Hồ Đồng Mô mênh mông sóng nước và rừng lim cổ thụ hàng trăm năm tuổi.</li>
+          <li>🏺 <strong>Tìm hiểu làng nghề truyền thống:</strong> Nghề làm tương, bánh tẻ, kẹo lạc, chè lam và nặn tò he truyền thống.</li>
+          <li>❤️ <strong>Cùng chung tay giữ gìn di sản:</strong> Tự hào lan tỏa vẻ đẹp lịch sử, văn hóa và con người Sơn Tây.</li>
+        </ul>
+
+        <div class="student-box">
+          <div class="quote">
+            “Em yêu Sơn Tây! Em yêu quê hương Việt Nam!<br>
+            Hãy cùng công nghệ lan tỏa những giá trị tốt đẹp!”
+          </div>
+          <div class="author-name">Nguyễn Hương Giang</div>
+          <div class="school-info">Lớp 1D4 • Trường Tiểu học Sơn Tây</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    Trang Web giới thiệu Video "Về Sơn Tây - Về Miền Di Sản" • Định dạng hiển thị 2K QHD (2560 × 1440)
+  </footer>
+
+  <script>
+    const ytPlayer = document.getElementById('yt-player');
+    const html5Player = document.getElementById('html5-player');
+    let usingLocalPlayer = false;
+
+    // Nếu mở trực tiếp từ ổ cứng máy tính (file://), tự động dùng file MP4 trong thư mục để tránh Lỗi 153 của YouTube
+    if (window.location.protocol === 'file:') {
+      ytPlayer.style.display = 'none';
+      html5Player.style.display = 'block';
+      usingLocalPlayer = true;
+    }
+
+    function toggleSharpen(enabled) {
+      if (enabled) {
+        ytPlayer.classList.add('enhance-2k');
+        html5Player.classList.add('enhance-2k');
+      } else {
+        ytPlayer.classList.remove('enhance-2k');
+        html5Player.classList.remove('enhance-2k');
+      }
+    }
+
+    function seekTo(seconds) {
+      if (usingLocalPlayer) {
+        html5Player.currentTime = seconds;
+        html5Player.play();
+      } else {
+        ytPlayer.src = `https://www.youtube.com/embed/vjE7unTdR8w?start=${seconds}&autoplay=1&rel=0&playsinline=1`;
+      }
+    }
+
+    function loadCustomVideo(event) {
+      const file = event.target.files[0];
+      if (file) {
+        ytPlayer.style.display = 'none';
+        html5Player.style.display = 'block';
+        usingLocalPlayer = true;
+        html5Player.src = URL.createObjectURL(file);
+        html5Player.play();
+      }
+    }
+  
+    // Tự động điền link trang web hiện tại nếu đã được đưa lên mạng (https://)
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+        const currentUrl = window.location.href;
+        document.getElementById('qr-url-input').value = currentUrl;
+        updateQRCode();
+      }
+    });
+
+    function updateQRCode() {
+      const url = document.getElementById('qr-url-input').value.trim();
+      if (url) {
+        document.getElementById('live-qr-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(url);
+      }
+    }
+
+  </script>
+</body>
+</html>
