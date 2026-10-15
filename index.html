@@ -398,43 +398,7 @@
         </video>
       </div>
 
-      <!-- Thanh công cụ hỗ trợ chọn file hoặc mở trực tiếp YouTube -->
-      <div class="file-upload-bar" id="local-file-bar">
-        <span>💡 Bạn có thể chọn file MP4 từ thiết bị hoặc mở trực tiếp trên YouTube:</span>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <label class="file-upload-btn">
-            📂 Chọn File Video MP4 từ máy
-            <input type="file" accept="video/*" style="display:none" onchange="loadCustomVideo(event)">
-          </label>
-          <a href="https://youtu.be/vjE7unTdR8w?si=RzfUOxhFkZrG7EED" target="_blank" class="file-upload-btn" style="background: #b71c1c;">
-            ▶️ Xem thẳng trên YouTube
-          </a>
-        </div>
-      </div>
-    
-      <!-- Hộp tạo Mã QR trực tiếp ngay trong trang HTML -->
-      <div class="file-upload-bar" style="margin-top: 10px; background: #f0fdf4; border-color: #16a34a;">
-        <div style="flex: 1; min-width: 240px;">
-          <strong style="color: #15803d;">📱 Tạo Mã QR để mở trên Điện Thoại:</strong>
-          <p style="font-size: 0.82rem; color: #374151; margin-top: 4px;">
-            Dán đường link trang web (sau khi bạn kéo file <code>index.html</code> lên <b>tiiny.host</b> hoặc <b>app.netlify.com/drop</b>) hoặc giữ nguyên link video dưới đây để lấy Mã QR quét trên điện thoại:
-          </p>
-          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-            <input id="qr-url-input" type="text" value="https://youtu.be/vjE7unTdR8w" 
-              style="flex: 1; padding: 7px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; min-width: 220px;" 
-              placeholder="Nhập link https://... của bạn vào đây" />
-            <button onclick="updateQRCode()" class="file-upload-btn" style="background: #15803d; border: none;">
-              🔄 Tạo Mã QR
-            </button>
-          </div>
-        </div>
-        <div style="text-align: center; background: #fff; padding: 8px; border-radius: 10px; border: 1px solid #bbf7d0;">
-          <img id="live-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fyoutu.be%2FvjE7unTdR8w" 
-            alt="Mã QR" style="width: 110px; height: 110px; display: block; margin: 0 auto;" />
-          <span style="font-size: 0.72rem; color: #15803d; font-weight: 600;">Quét bằng Camera ĐT</span>
-        </div>
-      </div>
-
+     
     </section>
 
     <div class="info-grid">
